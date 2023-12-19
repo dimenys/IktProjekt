@@ -20,13 +20,23 @@ export default function Artists_Data(props)
 
     const artistsElements = artist.map(artistobj =>
     {
-        return (
+        /*return (
             <Card
                 key={artistobj.ArtistID}
                 {...artistobj}
                 updateCardState={props.stateChange}
             />
-        )
+        )*/
+
+        const artistsElements = artist.map(artistobj => {
+            return (
+              <Card
+                key={artistobj.ArtistID} 
+                {...artistobj}
+                updateCardState={props.stateChange}
+              />
+            );
+          });
 
     }
 
