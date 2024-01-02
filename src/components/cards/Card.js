@@ -4,8 +4,8 @@ import "./card.css"
 
 function Card(props)
 {
-    return (
-        <div className="card width m-1 p-1 d-inline-block move shadow-5 grow" key={props.ArtistID}>
+    /*return (
+        <div className="card width m-1 p-1 d-inline-block move shadow-5 grow" key={props.ArtistId}>
             <div className="card-body">
                 <p className="delete-icon">
                     <DeleteArtist
@@ -19,7 +19,23 @@ function Card(props)
             </div>
         </div>
 
-    )
+    )*/
+
+    return (
+        <div className="card width m-1 p-1 d-inline-block move shadow-5 grow" key={props.ArtistId}>
+          <div className="card-body">
+            <p className="delete-icon">
+              <DeleteArtist
+                {...props}
+              />
+            </p>
+      
+            <UpdateArtist
+              {...props}
+            />
+          </div>
+        </div>
+      );
 }
 
 export default Card

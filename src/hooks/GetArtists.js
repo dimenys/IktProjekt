@@ -18,7 +18,7 @@ export default function Artists_Data(props)
 
     }, [props.count])
 
-    const artistsElements = artist.map(artistobj =>
+    /*const artistsElements = artist.map(artistobj =>
     {
         /*return (
             <Card
@@ -26,25 +26,35 @@ export default function Artists_Data(props)
                 {...artistobj}
                 updateCardState={props.stateChange}
             />
-        )*/
-
-        const artistsElements = artist.map(artistobj => {
+        )
+    })*/
+        /*const artistsElements = artist.map(artistobj => {
             return (
               <Card
-                key={artistobj.ArtistID} 
+                key={artistobj.ArtistId} 
+                {...artistobj}
+                updateCardState={props.stateChange}
+              />
+            );
+          });*/
+
+          const artistsElements = artist.map(artistobj => {
+            return (
+              <Card
+                key={artistobj.ArtistId} 
                 {...artistobj}
                 updateCardState={props.stateChange}
               />
             );
           });
 
-    }
+    
 
-    )
+    
 
-    return (
-        <>
-            {artistsElements}
-        </>
-    )
+          return (
+            <div key="artists-list">
+              {artistsElements}
+            </div>
+          );
 }
