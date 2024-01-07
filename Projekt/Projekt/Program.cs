@@ -15,8 +15,7 @@ namespace Projekt
                 options.AddPolicy(MyAllowSpecificOrigins,
                                       policy =>
                                       {
-                                          policy.WithOrigins("http://172.22.128.1:3000",
-                                                             "http://localhost:3000")
+                                          policy.AllowAnyOrigin()
                                                                 .AllowAnyHeader()
                                                                 .AllowAnyMethod();
                                       });

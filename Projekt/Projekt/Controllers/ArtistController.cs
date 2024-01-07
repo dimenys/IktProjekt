@@ -68,11 +68,12 @@ namespace Projekt.Controllers
         {
             var artist = new Artist
             {
-                /*Id = Guid.NewGuid(),
-                Name = createCarDto.Name,
-                Description = createCarDto.Description,
-                Color = createCarDto.Color,
-                CreatedTime = DateTime.UtcNow*/
+                ArtistName = createArtistDto.ArtistName,
+                Origin = createArtistDto.Origin,
+                ActiveStatus = createArtistDto.ActiveStatus,
+                NumberOfWorks = createArtistDto.NumberOfWorks,
+                
+                /*Id = Guid.NewGuid()*/
             };
 
             using (var context = new ArtistDbContext())
@@ -109,10 +110,11 @@ namespace Projekt.Controllers
                 }
                 else
                 {
-                    /*existingCar.Name = updateCarDto.Name;
-                    existingCar.Description = updateCarDto.Description;
-                    existingCar.Color = updateCarDto.Color;
-                    */
+                    existingArtist.ArtistName = updateArtistDto.ArtistName;
+                    existingArtist.Origin = updateArtistDto.Origin;
+                    existingArtist.ActiveStatus = updateArtistDto.ActiveStatus;
+                    existingArtist.NumberOfWorks = updateArtistDto.NumberOfWorks;
+                    
                     context.artists.Update(existingArtist);
                     context.SaveChanges();
                     response.Result = existingArtist;
