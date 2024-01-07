@@ -14,10 +14,10 @@ return (
                 method: "POST",
                 credentials: "include",
                 body: JSON.stringify({
-                    ArtistName: e.target.elements.name.value,
-                    price: e.target.elements.price.value,
-                    quantity: e.target.elements.quantity.value,
-                    imageURL: e.target.elements.imageURL.value,
+                    ArtistName: e.target.elements.artistName.value,
+                    Origin: e.target.elements.origin.value,
+                    NumberOfWorks: e.target.elements.numberOfWorks.value,
+                    ActiveStatus: e.target.elements.activeStatus.value,
                 }),
             })
             .then(() => {
@@ -33,21 +33,21 @@ return (
                     </div>
             </div>
             <div className='form-group row pb-3'>
-                <label htmlFor="price" className='col-sm-3 col-form-label'> Ár: </label>
+                <label htmlFor="NumberOfWorks" className='col-sm-3 col-form-label'> Zenék száma: </label>
                     <div>
-                        <input type="number" id="price" name="price" className="form-control" autoComplete='price' />
+                        <input type="number" id="NumberOfWorks" name="NumberOfWorks" className="form-control" autoComplete='NumberOfWorks' />
                     </div>
             </div>
             <div className='form-group row pb-3'>
-                <label htmlFor="quantity" className='col-sm-3 col-form-label'> Darabszám: </label>
+                <label htmlFor="origin" className='col-sm-3 col-form-label'> Származás: </label>
                     <div>
-                        <input type="number" id="quantity" name="quantity" className="form-control" autoComplete='quantity' />
+                        <input type="text" id="origin" name="origin" className="form-control" autoComplete='origin' />
                     </div>
             </div>
             <div className='form-group row pb-3'>
-                <label htmlFor="imageURL" className='col-sm-3 col-form-label'> Kép URL: </label>
+                <label htmlFor="activeStatus" className='col-sm-3 col-form-label'> Aktiv?: </label>
                     <div>
-                        <input type="text" id="imageURL" name="imageURL" className="form-control" autoComplete='imageURL' />
+                        <input type="text" id="activeStatus" name="activeStatus" className="form-control" autoComplete='activeStatus' />
                     </div>
             </div>
             <button type="submit" className='btn btn-success'>Küldés</button>

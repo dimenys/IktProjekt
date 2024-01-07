@@ -8,90 +8,102 @@ export function ArtistModPage() {
     const id = param.eloadoId;
     const [, setArtist] = useState([]);
     const [modname, setModname] = useState("");
-    const [modprice, setModprice] = useState("");
-    const [modbrand, setModbrand] = useState("");
-    const [modquantity, setModquantity] = useState("");
-    const [modimageurl, setModimageurl] = useState("");
+    const [modorigin, setModorigin] = useState("");
+    const [modnumberOfWorks, setModnumberOfWorks] = useState("");
+    const [modactiveStatus, setModactiveStatus] = useState("");
 
     useEffect(() => {
-
         (async () => {
-            try {
+          try {
             const res = await fetch(`https://localhost:7088/artists/${id}`, { credentials: "include" });
             const artistData = await res.json();
             setArtist(artistData);
             setModname(artistData.name);
-            setModprice(artistData.price);
-            setModbrand(artistData.brand);
-            setModquantity(artistData.quantity);
-            setModimageurl(artistData.imageURL);
-        } catch (error) {
-            console.log(error);   
-        } 
-    })();
-}, [id, modname, modprice, modbrand, modquantity, modimageurl]);
-
-const modName = (e) => {
-    setModname(e.target.value);
-}
-const modPrice = (e) => {
-    setModprice(e.target.value);
-}
-const modBrand = (e) => {
-    setModbrand(e.target.value);
-}
-const modQuantity = (e) => {
-    setModquantity(e.target.value);  
-}
-const modimageUrl = (e) => {
-    setModimageurl(e.target.value);
-}
-return(
-    <div className='p-5 content bg-lavender text-center'>
-        <h2>Előadó módosítás</h2>
-        <form
-        onSubmit={(e) => {
-            e.preventDefault();
-            fetch(`https://localhost:7088/artists/${id}`, {
-                method: "PUT",
-                credentials: "include",
-                body: JSON.stringify({
-                    name: e.target.elements.name.value,
-                    brand: e.target.elements.brand.value,
-                    price: e.target.elements.price.value,
-                    quantity: e.target.elements.quantity.value,
-                    imageURL: e.target.elements.imageURL.value,
-                }),
-            })
-            .then(() => {
-                navigate("/");
-            })
-            .catch(console.log);
-        }}
+            setModnumberOfWorks(artistData.numberOfWorks);
+            setModorigin(artistData.origin);
+            setModactiveStatus(artistData.activeStatus);
+          } catch (error) {
+            console.log(error);
+          }
+        })();
+      }, [id, modname, modnumberOfWorks, modorigin, modactiveStatus]);
+      useEffect(() => {
+        const saveChanges = async () => {
+          try {
+            const res = await fetch(`https://localhost:7088/artists/${id}`, {
+              method: "PUT",
+              credentials: "include",
+              body: JSON.stringify({
+                ArtistName: modname,
+                Origin: modorigin,
+                NumberOfWorks: modnumberOfWorks,
+                ActiveStatus: modactiveStatus,
+              }),
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        };
+      
+        saveChanges();
+      }, [id, modname, modorigin, modnumberOfWorks, modactiveStatus]);
+    
+      const modName = (e) => {
+        setModname(e.target.value);
+      };
+    
+      const modNumberOfWorks = (e) => {
+        setModnumberOfWorks(e.target.value);
+      };
+    
+      const modOrigin = (e) => {
+        setModorigin(e.target.value);
+      };
+    
+      const modActiveStatus = (e) => {
+        setModactiveStatus(e.target.value);
+      };
+    
+      return (
+        <div className='p-5 content bg-lavender text-center'>
+          <h2>Előadó módosítás</h2>
+           <form
+        //     onSubmit={(e) => {
+        //       e.preventDefault();
+        //       fetch(`https://localhost:7088/artists/${id}`, {
+        //         method: "PUT",
+        //         credentials: "include",
+        //         body: JSON.stringify({
+        //           ArtistName: e.target.elements.ArtistName.value,
+        //           Origin: e.target.elements.Origin.value,
+        //           NumberOfWorks: e.target.elements.NumberOfWorks.value,
+        //           ActiveStatus: e.target.elements.ActiveStatus.value,
+        //         }),
+        //       })
+        //         .then(() => {
+        //           navigate("/");
+        //         })
+        //         .catch(console.log);
+        //     }}
             >
             <div className='form-group row pb-3'>
-            <div><label htmlFor="name" className='col-sm-3 col-form-label'> Név: </label>
-                        <input type="text" id="name" name="name" className="form-control" defaultValue={modname} onChange={modName} autoComplete="off"/>
+            <div><label htmlFor="ArtistName" className='col-sm-3 col-form-label'> Név: </label>
+                        <input type="text" id="ArtistName" name="ArtistName" className="form-control" defaultValue={modname} onChange={modName} autoComplete="off"/>
                     </div>
             </div>
             <div className='form-group row pb-3'>
-            <div><label htmlFor="brand" className='col-sm-3 col-form-label'> Márka - szőlő: </label>   
-                        <input type="text" id="brand" name="brand" className="form-control" defaultValue={modbrand} onChange={modBrand} autoComplete="off"/>
+            <div><label htmlFor="Origin" className='col-sm-3 col-form-label'> Származás: </label>   
+                        <input type="text" id="Origin" name="Origin" className="form-control" defaultValue={modorigin} onChange={modOrigin} autoComplete="off"/>
                     </div>
             </div>
             <div className='form-group row pb-3'>
-            <div><label htmlFor="price" className='col-sm-3 col-form-label'> Ár: </label>   
-                        <input type="number" id="price" name="price" className="form-control" defaultValue={modprice} onChange={modPrice} autoComplete="off" />
+            <div><label htmlFor="NumberOfWorks" className='col-sm-3 col-form-label'> Zenék száma: </label>   
+                        <input type="number" id="NumberOfWorks" name="NumberOfWorks" className="form-control" defaultValue={modnumberOfWorks} onChange={modNumberOfWorks} autoComplete="off" />
                     </div>
             </div>
             <div className='form-group row pb-3'>
-            <div><label htmlFor="quantity" className='col-sm-3 col-form-label'> Darabszám: </label>   
-                        <input type="number" id="quantity" name="quantity" className="form-control" defaultValue={modquantity} onChange={modQuantity} autoComplete="off" />
-                    </div>
-            </div>
-            <div className='form-group row pb-3'>
-            <div><label htmlFor="imageURL" className='col-sm-3 col-form-label'> Kép URL: </label>   
-                        <input type="text" id="imageURL" name="imageURL" className="form-control" defaultValue={modimageurl} onChange={modimageUrl} autoComplete="off" />
+            <div><label htmlFor="ActiveStatus" className='col-sm-3 col-form-label'> Aktív: </label>   
+                        <input type="text" id="ActiveStatus" name="ActiveStatus" className="form-control" defaultValue={modactiveStatus} onChange={modActiveStatus} autoComplete="off" />
                     </div>
             </div>
             <button type="submit" className='btn btn-success'>Küldés</button>

@@ -25,20 +25,16 @@ export function ArtistDeletePage() {
     }, [id]);
     return (
              <div className='p-5 m-auto text-center content bg-lavender'>
-    { isPending || !artist.id ? ( <div className='spinner-border'></div>) : (       
+    { isPending || !artist.Id ? ( <div className='spinner-border'></div>) : (       
                 <div>
                 <h2>Előadó törlése</h2>
                 <div className='card p-3'>
                     <div className='card-body'>
-                    <h4>{artist.brand}</h4>
-                    <h5 className='card-title'>{artist.name}</h5>
-                    <div className='lead'>{artist.price}.- HUF</div>
-                    <p>Készleten: {artist.quantity} db</p>
-                        <img className='img-fluid rounded'
-                        style={{ maxHeight: "500px" }}
-                        alt = "hiányzik a képed innen!"
-                        src={artist.imageURL ? artist.imageURL : "https://via.placeholder.com/400x800"}
-                        /></div>
+                    <h4>{artist.origin}</h4>
+                    <h5 className='card-title'>{artist.artistName}</h5>
+                    <div className='lead'>{artist.numberOfWorks}</div>
+                    <p>Aktiv: {artist.activeStatus}</p>
+                        </div>
                         <form onSubmit={async (e) => {
                             try{
                             e.preventDefault();

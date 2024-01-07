@@ -27,7 +27,7 @@ function App() {
       </nav>
       <Routes>
           <Route path="/" element={<ArtistListPage />} />
-          <Route path="/eloado/:eloadoId" element={<IArtistSinglePage />} />
+          <Route path="/eloado/:eloadoId" element={<ArtistSinglePage />} />
           <Route path="uj-eloado" element={<ArtistCreatePage />} />
           <Route path="mod-eloado/:eloadoId" element={<ArtistModPage />} />
           <Route path="del-eloado/:eloadoId" element={<ArtistDeletePage />} />
