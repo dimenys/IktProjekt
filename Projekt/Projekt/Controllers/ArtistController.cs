@@ -41,11 +41,11 @@ namespace Projekt.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Artist> GetById(int Id)
+        public ActionResult<Artist> GetById(int id)
         {
             using (var context = new ArtistDbContext())
             {
-                var result = context.artists.FirstOrDefault(x => x.ArtistId == Id);
+                var result = context.artists.FirstOrDefault(x => x.ArtistId == id);
                 if (result == null)
                 {
                     response.Message = "Sikertelen lekérdezés";
@@ -68,6 +68,7 @@ namespace Projekt.Controllers
         {
             var artist = new Artist
             {
+                ArtistId= 0,
                 ArtistName = createArtistDto.ArtistName,
                 Origin = createArtistDto.Origin,
                 ActiveStatus = createArtistDto.ActiveStatus,
@@ -75,7 +76,6 @@ namespace Projekt.Controllers
                 
                 /*Id = Guid.NewGuid()*/
             };
-
             using (var context = new ArtistDbContext())
             {
                 if (artist == null)
@@ -98,11 +98,11 @@ namespace Projekt.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Artist> Put(int Id, UpdateArtistDto updateArtistDto)
+        public ActionResult<Artist> Put(int id, UpdateArtistDto updateArtistDto)
         {
             using (var context = new ArtistDbContext())
             {
-                var existingArtist = context.artists.FirstOrDefault(x => x.ArtistId == Id);
+                var existingArtist = context.artists.FirstOrDefault(x => x.ArtistId == id);
                 if (existingArtist == null)
                 {
                     response.Message = "Sikertelen frissítés";
@@ -110,6 +110,7 @@ namespace Projekt.Controllers
                 }
                 else
                 {
+                    existingArtist.ArtistId = id;
                     existingArtist.ArtistName = updateArtistDto.ArtistName;
                     existingArtist.Origin = updateArtistDto.Origin;
                     existingArtist.ActiveStatus = updateArtistDto.ActiveStatus;
@@ -127,11 +128,11 @@ namespace Projekt.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Artist> Delete(int Id)
+        public ActionResult<Artist> Delete(int id)
         {
             using (var context = new ArtistDbContext())
             {
-                var result = context.artists.FirstOrDefault(x => x.ArtistId == Id);
+                var result = context.artists.FirstOrDefault(x => x.ArtistId == id);
                 if (result == null)
                 {
                     response.Message = "Sikertelen törlés";
