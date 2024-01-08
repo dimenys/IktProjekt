@@ -10,11 +10,13 @@ export function ArtistDeletePage() {
 
     useEffect(() => {
         setPending(true);
+        
         (async () => {
             try {
-            const res = await fetch(`https://localhost:7088/artists/${id}`, { credentials: "include" });
+            const res = await fetch(`https://localhost:7088/artists/${id}`);
             const artist = await res.json();
-            setArtist(artist);
+            console.log(artist)
+            setArtist(artist.result);
         } catch (error) {
             console.log(error);   
         }
@@ -25,9 +27,10 @@ export function ArtistDeletePage() {
     }, [id]);
     return (
              <div className='p-5 m-auto text-center content bg-lavender'>
-    { isPending || !artist.Id ? ( <div className='spinner-border'></div>) : (       
+    { isPending || !artist.artistId ? ( <div className='spinner-border'></div>) : (       
                 <div>
                 <h2>Előadó törlése</h2>
+            
                 <div className='card p-3'>
                     <div className='card-body'>
                     <h4>{artist.origin}</h4>
@@ -39,8 +42,7 @@ export function ArtistDeletePage() {
                             try{
                             e.preventDefault();
                             await fetch(`https://localhost:7088/artists/${id}`, {
-                                method: "DELETE",
-                                credentials: "include",
+                                method: "DELETE"
                             });
                             navigate("/");}
                         catch(error) {

@@ -8,13 +8,19 @@ export function ArtistListPage() {
 
     useEffect(() => {
         setFetchPending(true);
-        fetch("https://localhost:7088/artists", {credentials: "include"})
-        .then((res) => res.json())
-        .then((eloadok) => setArtists(eloadok))
-        .catch(console.log)
+        async function x()
+    {
+        await fetch("https://localhost:7088/artists").then(async(res) => {
+            const data = await res.json();
+            setArtists(data.result);
+            console.log(data);
+        }).catch(console.log)
         .finally(() => {
             setFetchPending(false);
         });
+    }
+    x();
+        
  }, []);
  return (
    <div className='p-5 m-auto text-center content bg-ivory'>
@@ -22,15 +28,16 @@ export function ArtistListPage() {
         <div>
             <h2>Előadók</h2>
             {artists.map((artist) => (
-                <div key={artist.Id + 4} className='card col-sm-3 d-inline-block m-1 p-2'>
+                <div key={artist.artistId} className='card col-sm-3 d-inline-block m-1 p-2'>
                     <h6 className='text-muted'>{artist.origin}</h6>
                     <h5 className='text-muted'>{artist.artistName}</h5>
-                    <div>{artist.numberOfWorks}</div>
+                    <div>id={artist.artistId}</div>
+                    <div>k:{artist.numberOfWorks}</div>
                     <div className='small'>Aktív: {artist.activeStatus}</div>
-                    <NavLink key={artist.Id+1} to={"/mod-eloado/" + artist.Id}>
+                    <NavLink key={`mod-${artist.artistId}`} to={"/mod-eloado/" + artist.artistId}>
                         <i className="bi bi-pencil-square mx-1">Módosítás</i>
                     </NavLink>
-                    <NavLink key={artist.Id+2} to={"/del-eloado/" + artist.Id} className={"text-danger"}>
+                    <NavLink key={"/del-eloado/" + artist.artistId} to={"/del-eloado/" + artist.artistId} className={"text-danger"}>
                         <i className="bi bi-trash3">Törlés</i>
                     </NavLink>
                 </div>

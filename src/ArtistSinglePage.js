@@ -11,7 +11,7 @@ export function ArtistSinglePage() {
         setPending(true);
         (async() => {
             try {
-        const res = await fetch(`https://localhost:7088/artists/${id}`, {credentials: "include"})
+        const res = await fetch(`https://localhost:7088/artists/${id}`)
         const eloado =await res.json();
         setArtist(eloado);
         } catch(error) {

@@ -12,11 +12,12 @@ return (
             e.preventDefault();
             fetch("https://localhost:7088/artists", {
                 method: "POST",
-                credentials: "include",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    ArtistName: e.target.elements.artistName.value,
+                    //ArtistId:e.target.elements.ArtistId.value+1,
+                    ArtistName: e.target.elements.name.value,
                     Origin: e.target.elements.origin.value,
-                    NumberOfWorks: e.target.elements.numberOfWorks.value,
+                    NumberOfWorks: e.target.elements.NumberOfWorks.value,
                     ActiveStatus: e.target.elements.activeStatus.value,
                 }),
             })
